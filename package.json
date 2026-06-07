@@ -1,0 +1,44 @@
+{
+  "name": "tms-agent",
+  "version": "0.1.0",
+  "description": "Local agent for TMS Playwright automation — wakes on Run, opens Chrome on your machine, sleeps when idle",
+  "license": "MIT",
+  "author": "meadhikari <shubhamchavan6795@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schavan-inferyx/tms-agent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/schavan-inferyx/tms-agent/issues"
+  },
+  "homepage": "https://github.com/schavan-inferyx/tms-agent#readme",
+  "keywords": [
+    "tms",
+    "playwright",
+    "test-automation",
+    "agent",
+    "chrome",
+    "cdp",
+    "e2e",
+    "meadhikari"
+  ],
+  "files": [
+    "bin",
+    "lib",
+    "README.md"
+  ],
+  "bin": {
+    "tms-agent": "./bin/tms-agent.js"
+  },
+  "main": "lib/server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "scripts": {
+    "prepack": "node -e \"require('./package.json')\"",
+    "prepublishOnly": "node bin/tms-agent.js --version"
+  }
+}
