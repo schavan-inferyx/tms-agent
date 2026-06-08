@@ -1,6 +1,6 @@
 {
   "name": "tms-agent",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "description": "Local agent for TMS Playwright automation — wakes on Run, opens Chrome on your machine, sleeps when idle",
   "license": "MIT",
   "author": "meadhikari <shubhamchavan6795@gmail.com>",
