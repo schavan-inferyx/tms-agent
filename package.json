@@ -1,6 +1,6 @@
 {
   "name": "tms-agent",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Local agent for TMS Playwright automation — wakes on Run, opens Chrome on your machine, sleeps when idle",
   "license": "MIT",
   "author": "meadhikari <shubhamchavan6795@gmail.com>",
@@ -38,6 +38,7 @@
     "ws": "^8.18.0"
   },
   "scripts": {
+    "postinstall": "node lib/install.js",
     "prepack": "node -e \"require('./package.json')\"",
     "prepublishOnly": "node bin/tms-agent.js --version"
   }

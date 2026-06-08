@@ -1,63 +1,43 @@
 # tms-agent
 
-Local agent for **Playwright test automation** (by [meadhikari](https://www.npmjs.com/~meadhikari)). Test code runs on the platform server; **Chrome runs on your machine** so you can watch tests execute.
+Local agent for **Playwright test automation**. Test code runs on the TMS server; **Chrome runs on your machine**.
 
-Requires **Node.js 18+** and **Google Chrome** (or Chromium).
+Requires **Node.js 18+** and **Google Chrome**.
 
-## Install
+## Install (only step for testers)
 
 ```bash
 npm install -g tms-agent
 ```
 
-Verify:
+That is all. The installer:
 
-```bash
-tms-agent --version
-curl http://127.0.0.1:9345/health
-```
+- Starts the agent in the background on `127.0.0.1:9345`
+- Registers login autostart (macOS LaunchAgent / Linux systemd user service)
+- Saves TMS server settings when you open **Automation** in the browser (no env vars)
 
-During development:
+## How it connects
 
-```bash
-git clone https://github.com/schavan-inferyx/tms-agent.git
-cd tms-agent
-npm install
-npm link
-```
+1. Open **Test → Automation** in TMS in your browser  
+2. The page opens a **WebSocket** to `ws://127.0.0.1:9345/ws`  
+3. The browser sends your TMS server URL; the agent saves it to `~/.tms-agent/config.json`  
+4. When you leave Automation, the WebSocket closes and Chrome closes if idle  
 
-## Usage
-
-Run once after install (or add to startup):
+## Manual start (optional)
 
 ```bash
 tms-agent
 ```
 
-Options:
-
-```bash
-tms-agent --version   # print package version
-tms-agent --help      # show help
-```
-
-- Listens on `http://127.0.0.1:9345`
-- Wakes when your test platform POSTs `/run` after you click **Run**
-- Opens Chrome on your machine; test code runs on the server
-- Sleeps ~2 minutes after idle
-
-## Environment
+## Environment (optional overrides)
 
 | Variable | Default |
 |----------|---------|
 | `TMS_AGENT_PORT` | `9345` |
-| `TMS_API_URL` | `http://localhost:5000/api` |
-| `TMS_TUNNEL_URL` | `ws://127.0.0.1:8787` |
-| `TMS_ORIGIN_ALLOWLIST` | `http://localhost:3000` |
-| `TMS_IDLE_SLEEP_MS` | `120000` |
+| `TMS_API_URL` | Set by browser, or `http://localhost:5000/api` |
+| `TMS_TUNNEL_URL` | Set by browser |
+| `TMS_ORIGIN_ALLOWLIST` | Set by browser |
 
-## Uninstall
+## Publish
 
-```bash
-npm uninstall -g tms-agent
-```
+See [tms-agent publish guide](../docs/tms-agent-publish-guide.md) in the monorepo.
